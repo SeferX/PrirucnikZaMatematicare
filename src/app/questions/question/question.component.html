@@ -1,0 +1,39 @@
+<div class="row ml-3">
+  <div class="card border-success mt-3 mr-3" *ngFor="let question of questions; let i = index"
+    style="height: min-content;">
+    <div class="card-body">
+      <div *ngIf="(questionToEdit == null || questionToEdit == undefined) 
+        || (!isEditing && questionToEdit.id != question.id) 
+        || (!isEditing && questionToEdit.id == question.id) 
+        || (isEditing && questionToEdit.id != question.id)">
+        <span>
+          {{i + 1}}. <br>
+          Id: {{question.id}} <br>
+          Q: {{question.question}} <br>
+          A: {{question.answer}} <br>
+          D: {{question.description}} <br>
+        </span>
+        <div class="d-flex flex-row align-items-start justify-content-between mt-3">
+          <button class="btn btn-primary" (click)="showEdit(question)" *ngIf="auth.canEdit(user)"><i
+              class="fas fa-pen"></i></button>
+          <button class="btn btn-danger" (click)="deleteQuestion(question)" *ngIf="auth.canDelete(user)"><i
+              class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div *ngIf="isEditing && questionToEdit.id == question.id">
+        <form #editQuestion="ngForm" (ngSubmit)="editSubmit(editQuestion.value, question.id)">
+          <label for="question">Question:</label>
+          <input type="text" class="form-control" name="question" [(ngModel)]="question.question" required>
+          <label for="answer">Answer:</label>
+          <input type="text" class="form-control" name="answer" [(ngModel)]="question.answer" required>
+          <label for="description">Description:</label>
+          <input type="text" class="form-control" name="description" [(ngModel)]="question.description" required>
+          <div class="d-flex flex-row align-items-start mt-3">
+            <button class="btn btn-outline-dark mr-3" [disabled]="editQuestion.invalid">Save</button>
+            <button class="btn btn-outline-secondary" (click)="hideEdit()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

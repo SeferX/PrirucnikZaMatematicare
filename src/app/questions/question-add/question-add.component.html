@@ -1,0 +1,15 @@
+<button class="btn btn-success mt-3" (click)="show()" *ngIf="auth.canEdit(user)">Add question <i
+    class="fas fa-plus"></i></button>
+<div class="card mt-2" *ngIf="!isHidden">
+  <form #addQuestion="ngForm" (ngSubmit)="onSubmit(addQuestion.value)">
+    <div class="card-body d-flex flex-column">
+      <label for="question">Question:</label>
+      <input type="text" class="form-control" name="question" ngModel required>
+      <label for="answer">Answer:</label>
+      <input type="text" class="form-control" name="answer" ngModel required>
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" name="description" ngModel required>
+      <button class="btn btn-outline-dark mt-3" [disabled]="addQuestion.invalid">Save</button>
+    </div>
+  </form>
+</div>

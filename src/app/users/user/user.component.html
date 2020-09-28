@@ -1,23 +1,40 @@
 <div class="d-flex flex-column mr-3">
-  <div *ngIf="authService.user$ | async as user; else login">
-    <div class="card mt-3 border-success">
-      <div class="card-body d-flex flex-column">
-        <img [src]="user.photoURL" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-        <span class="text-center">{{user.uid}}</span>
-        <span class="text-center">{{user.displayName}}</span>
-        <span class="text-center">{{user.email}}</span>
-        <span class="text-left"><strong>Roles:</strong></span>
-        <span class="text-left" [ngClass]="{'text-success': user.roles.admin}">Admin : {{user.roles.admin}}</span>
-        <span class="text-left" [ngClass]="{'text-success': user.roles.moderator}">Moderator :
-          {{user.roles.admin}}</span>
-        <span class="text-left" [ngClass]="{'text-success': user.roles.guest}">Guest : {{user.roles.guest}}</span>
+  <div class="card mt-3 border-success">
+    <div class="card-body d-flex flex-column">
+      <img [src]="user.photoURL" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+      <span class="text-center">{{user.uid}}</span>
+      <span class="text-center">{{user.displayName}}</span>
+      <span class="text-center">{{user.email}}</span>
+      <span class="text-left"><strong>Roles:</strong></span>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" 
+          [(ngModel)]="user.roles.admin" 
+          [checked]="user.roles.admin" 
+          (change)="editRole(user)"
+          [disabled]="user.email == 'seferibrahim2@gmail.com' || user.email == loggedInUser.email">
+        <label class="form-check-label">
+          Admin
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" 
+          [(ngModel)]="user.roles.moderator" 
+          [checked]="user.roles.moderator" 
+          (change)="editRole(user)"
+          [disabled]="user.email == 'seferibrahim2@gmail.com' || user.email == loggedInUser.email">
+        <label class="form-check-label">
+          Moderator
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" 
+          [(ngModel)]="user.roles.guest" 
+          [checked]="user.roles.guest" 
+          (change)="editRole(user)"
+          [disabled]="user.email == 'seferibrahim2@gmail.com' || user.email == loggedInUser.email">
+        <label class="form-check-label">
+          Guest
+        </label>
       </div>
     </div>
-    <button class="btn btn-light mt-3 mr-3" (click)="authService.signOut()">Sign out</button>
-    <app-question-add></app-question-add>
   </div>
-  <ng-template #login>
-    <p class="mt-3">You're not signed up.</p>
-    <button class="btn btn-light" (click)="authService.googleLogin()">Sign up</button>
-  </ng-template>
-</div>

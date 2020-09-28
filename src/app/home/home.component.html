@@ -1,4 +1,4 @@
-<div class="d-flex flex-row align-items-start">
-  <app-user></app-user>
-  <app-question></app-question>
-</div>
+<app-questions></app-questions>
+<button class="btn btn-light ml-3 mt-3" (click)="authService.googleLogin()">Sign in</button>
+<button class="btn btn-light ml-3 mt-3" (click)="authService.signOut()">Sign out</button>
+<app-question-add></app-question-add>

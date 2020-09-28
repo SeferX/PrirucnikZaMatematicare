@@ -17,6 +17,7 @@ import { UserComponent } from './users/user/user.component';
 import { QuestionAddComponent } from './questions/question-add/question-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 // 2. Add your credentials from step 1
 var config = {
@@ -39,7 +40,8 @@ var config = {
     UserComponent,
     QuestionAddComponent,
     UserEditComponent,
-    UsersComponent
+    UsersComponent,
+    QuestionsComponent
   ],
   imports: [
     FormsModule,

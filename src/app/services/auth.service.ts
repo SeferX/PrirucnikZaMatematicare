@@ -72,5 +72,10 @@ export class AuthService {
     const allowedRoles = ['admin', 'moderator']
     return this.checkAuthorization(user, allowedRoles)
   }
+
+  onlyAdmin(user: User): boolean {
+    const allowedRoles = ['admin']
+    return this.checkAuthorization(user, allowedRoles)
+  }
 }
 

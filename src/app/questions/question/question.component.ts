@@ -1,6 +1,6 @@
 import { User } from './../../models/user.model';
 import { Question } from './../../models/question.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { QuestionsService } from 'src/app/services/questions.service';
 import { NotiflixService } from 'src/app/services/notiflix.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,14 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./question.component.sass']
 })
 export class QuestionComponent implements OnInit {
+  @Input('question') question: Question
   user: User
-  questions: Question[]
   isEditing: boolean = false
   questionToEdit: Question
   constructor(private questionsService: QuestionsService, private notiflixService: NotiflixService, public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.questionsService.getQuestions().subscribe(questions => this.questions = questions)
     this.auth.user$.subscribe(user => this.user = user)
   }
   showEdit(q: Question) {

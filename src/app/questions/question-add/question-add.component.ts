@@ -24,7 +24,7 @@ export class QuestionAddComponent implements OnInit {
     this.isHidden = !this.isHidden
   }
   onSubmit(q: Question) {
-    if (q && this.auth.canEdit(this.user)) {
+    if (q && this.auth.onlyModerator(this.user)) {
       this.questionsService.addQuestion(q)
       this.addQuestionForm.reset()
     }

@@ -21,7 +21,7 @@ export class QuestionComponent implements OnInit {
     this.auth.user$.subscribe(user => this.user = user)
   }
   showEdit(q: Question) {
-    if (this.auth.canEdit(this.user) && this.user != null) {
+    if (this.auth.onlyModerator(this.user) && this.user != null) {
       this.isEditing = true
       this.questionToEdit = q
     }
@@ -31,11 +31,11 @@ export class QuestionComponent implements OnInit {
     this.questionToEdit = null
   }
   deleteQuestion(q: Question) {
-    if (this.auth.canDelete(this.user) && this.user != null)
+    if (this.auth.onlyModerator(this.user) && this.user != null)
       this.questionsService.deleteQuestion(q)
   }
   editSubmit(q: Question, id: string) {
-    if (this.auth.canEdit(this.user) && this.user != null) {
+    if (this.auth.onlyModerator(this.user) && this.user != null) {
       this.hideEdit()
       this.questionsService.updateQuestion(q, id)
     }

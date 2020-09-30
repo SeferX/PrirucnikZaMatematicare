@@ -18,6 +18,7 @@ import { QuestionAddComponent } from './questions/question-add/question-add.comp
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { UsersGuard } from './guards/users-guard.guard';
 
 // 2. Add your credentials from step 1
 var config = {
@@ -41,7 +42,7 @@ var config = {
     QuestionAddComponent,
     UserEditComponent,
     UsersComponent,
-    QuestionsComponent
+    QuestionsComponent,
   ],
   imports: [
     FormsModule,
@@ -52,7 +53,7 @@ var config = {
     AngularFireStorageModule, // storage
     RoutesModule
   ],
-  providers: [],
+  providers: [UsersGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

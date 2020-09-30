@@ -42,9 +42,17 @@ export class AuthService {
     this.router.navigate([''])
   }
 
-  updateUserData({ uid, email, displayName, photoURL, roles }: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc<User>(`users/${uid}`)
-    const data = { uid, email, displayName, photoURL, roles }
+  async updateUserData({ uid, email, displayName, photoURL }: User) {
+    const userRef: AngularFirestoreDocument = this.afs.doc(`users/${uid}`);
+    const data: User = {
+      uid: uid,
+      displayName: displayName,
+      email: email,
+      photoURL: photoURL,
+      roles: {
+        guest: true
+      }
+    }
     return userRef.set(data, { merge: true })
   }
 
@@ -58,17 +66,12 @@ export class AuthService {
     return false
   }
 
-  canRead(user: User): boolean {
+  onlyGuest(user: User): boolean {
     const allowedRoles = ['admin', 'moderator', 'guest']
     return this.checkAuthorization(user, allowedRoles)
   }
 
-  canEdit(user: User): boolean {
-    const allowedRoles = ['admin', 'moderator']
-    return this.checkAuthorization(user, allowedRoles)
-  }
-
-  canDelete(user: User): boolean {
+  onlyModerator(user: User): boolean {
     const allowedRoles = ['admin', 'moderator']
     return this.checkAuthorization(user, allowedRoles)
   }

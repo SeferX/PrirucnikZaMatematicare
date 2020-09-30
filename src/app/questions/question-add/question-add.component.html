@@ -1,5 +1,5 @@
 <div class="ml-3">
-  <button class="btn btn-success mt-3" (click)="show()" *ngIf="auth.canEdit(user)">Add question <i
+  <button class="btn btn-success mt-3" (click)="show()" *ngIf="auth.onlyModerator(user)">Add question <i
       class="fas fa-plus"></i></button>
   <div class="card mt-2" *ngIf="!isHidden" style="width: 300px;">
     <form #addQuestion="ngForm" (ngSubmit)="onSubmit(addQuestion.value)">

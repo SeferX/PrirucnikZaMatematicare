@@ -10,11 +10,9 @@
         A: {{question.answer}} <br>
         D: {{question.description}} <br>
       </span>
-      <div class="d-flex flex-row align-items-start justify-content-between mt-3">
-        <button class="btn btn-primary" (click)="showEdit(question)" *ngIf="auth.canEdit(user)"><i
-            class="fas fa-pen"></i></button>
-        <button class="btn btn-danger" (click)="deleteQuestion(question)" *ngIf="auth.canDelete(user)"><i
-            class="fas fa-trash"></i></button>
+      <div class="d-flex flex-row align-items-start justify-content-between mt-3" *ngIf="auth.onlyModerator(user)">
+        <button class="btn btn-primary" (click)="showEdit(question)"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger" (click)="deleteQuestion(question)"><i class="fas fa-trash"></i></button>
       </div>
     </div>
     <div *ngIf="isEditing && questionToEdit.id == question.id">

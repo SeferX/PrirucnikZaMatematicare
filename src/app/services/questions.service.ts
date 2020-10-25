@@ -3,18 +3,28 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { NotiflixService } from './notiflix.service';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
   constructor(private afs: AngularFirestore, private notiflix: NotiflixService) { }
   getQuestions() {
-    return this.afs.collection<Question>('questions').snapshotChanges().pipe(map(changes => {
+    return this.afs.collection('questions').snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         var data = a.payload.doc.data() as Question
         data.id = a.payload.doc.id
         return data
       })
     }))
+  }
+  getQuestion(id: string) {
+    return this.afs.doc(`questions/${id}`).snapshotChanges().pipe(
+      map(doc => {
+        var data = doc.payload.data() as Question
+        data.id = doc.payload.id
+        return data
+      })
+    )
   }
   deleteQuestion(q: Question) {
     return this.afs

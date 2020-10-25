@@ -1,4 +1,4 @@
-<div class="card border-success mt-3 mr-3" style="height: min-content;">
+<div class="card mt-3 mr-3 col-md-5">
   <div class="card-body">
     <div *ngIf="(questionToEdit == null || questionToEdit == undefined) 
         || (!isEditing && questionToEdit.id != question.id) 
@@ -9,6 +9,14 @@
         Q: {{question.question}} <br>
         A: {{question.answer}} <br>
         D: {{question.description}} <br>
+        Q URL: {{question.qURL}} <br>
+        A URL: {{question.aURL}} <br>
+        D URL: {{question.dURL}} <br>
+        Points: {{question.points}} <br>
+        Time: {{question.time}} <br>
+        Difficulty: {{question.difficulty}} <br>
+        King Category Id: {{question.kingCategoryId}} <br>
+        Queen Category Id: {{question.queenCategoryId}} <br>
       </span>
       <div class="d-flex flex-row align-items-start justify-content-between mt-3" *ngIf="auth.onlyModerator(user)">
         <button class="btn btn-primary" (click)="showEdit(question)"><i class="fas fa-pen"></i></button>

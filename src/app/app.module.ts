@@ -19,6 +19,18 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { UsersGuard } from './guards/users-guard.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatListModule } from '@angular/material/list'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatInputModule } from '@angular/material/input'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { QuestionsService } from './services/questions.service';
+
 
 // 2. Add your credentials from step 1
 var config = {
@@ -51,7 +63,17 @@ var config = {
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
-    RoutesModule
+    RoutesModule,
+    BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSlideToggleModule,
+    MatRadioModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatCheckboxModule,
   ],
   providers: [UsersGuard],
   bootstrap: [AppComponent]

@@ -1,3 +1,75 @@
-<div class="row ml-3">
-  <app-question *ngFor="let question of questions" [question]="question"></app-question>
-</div>
+<button class="btn btn-light ml-3 mt-3" (click)="auth.googleLogin()">Sign in</button>
+<button class="btn btn-light ml-3 mt-3" (click)="auth.signOut()">Sign out</button>
+<app-question-add></app-question-add>
+<mat-sidenav-container class="question-container">
+  <mat-sidenav mode="side" opened class="question-sidenav">
+    <br>
+    <form #filterForm="ngForm" (ngSubmit)="onSubmitFilter(filterForm.value)">
+      <div class="d-flex flex-row align-items-center">
+        <mat-form-field class="question-filter-input col-md-5">
+          <mat-label>Search</mat-label>
+          <input matInput ngModel name="queryFilter">
+        </mat-form-field>
+        <button mat-raised-button color="accent" class="mr-3" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+        <div>
+          <div *ngIf="!filterAccordionOpened; else buttonToCloseFilter">
+            <button mat-raised-button color="primary" (click)="openAccordion()">Filter <i
+                class="fas fa-filter"></i></button>
+          </div>
+          <ng-template #buttonToCloseFilter>
+            <button mat-raised-button color="primary" (click)="closeAccordion()">Filter <i
+                class="fas fa-filter"></i></button>
+          </ng-template>
+        </div>
+        <button mat-raised-button color="warn" class="ml-3" type="button" (click)="clearForm(filterForm)">
+          <i class="fas fa-broom"></i>
+        </button>
+      </div>
+      <br>
+      <mat-accordion multi class="filter-accordion">
+        <mat-expansion-panel class="filter-panel">
+          <mat-radio-group ngModel name="difficulty">
+            <mat-radio-button class="easy-hard-radio" value="easy">
+              Lagano
+            </mat-radio-button>
+            <mat-radio-button class="easy-hard-radio" value="hard">
+              Teško
+            </mat-radio-button>
+          </mat-radio-group>
+          <section class="example-section">
+            <span class="example-list-section">
+              <mat-checkbox class="example-margin" ngModel id="kingCatId" name="kingCatId" value="1">
+                Algebra
+              </mat-checkbox>
+            </span>
+            <span class="example-list-section">
+              <ul>
+                <li>
+                  <mat-checkbox ngModel id="queenCatId" name="queenCatId" value="1">
+                    Sabiranje
+                  </mat-checkbox>
+                </li>
+              </ul>
+            </span>
+          </section>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </form>
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <div *ngFor="let question of questions">
+        <a mat-list-item [routerLink]="['/questions',question.id]">{{question.question}}</a>
+        <mat-divider></mat-divider>
+      </div>
+      <div *ngIf="questions.length < 1">
+        <p class="mt-3 ml-3">No questions found, try some other filters :)</p>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="question-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -6,10 +6,9 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./_home.component.sass']
+  styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }
